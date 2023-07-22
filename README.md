@@ -38,6 +38,7 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/your_webhook_here";
    - Navigate to chrome://extensions/.
    - Enable Developer mode by ticking the checkbox in the upper-right corner.
    - Click on the "Load unpacked" button.
+   - Navigate to the root directory where you cloned or downloaded this repository and select it. The root directory is the one that contains the `manifest.json` and `background.js` files among others.
    - Select the directory where you cloned or downloaded this repository.
    
 ## Usage
