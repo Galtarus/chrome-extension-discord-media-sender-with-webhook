@@ -5,13 +5,19 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "sendToDiscord",
     title: "Send to Discord",
-    contexts: ["selection", "image", "video"],
+    contexts: ["selection", "image", "video","link"],
   });
 });
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId === "sendToDiscord") {
     let formData = new FormData();
+    if (info.linkUrl) {
+      console.log("Link found: " + info.linkUrl);
+      formData.append("content", info.linkUrl);
+      sendToDiscord(formData);
+      return;  // If it's a link, we don't need to go any further
+    }
     if (info.srcUrl) {
       let response = await fetch(info.srcUrl);
       let blob = await response.blob();
@@ -53,4 +59,16 @@ function base64ToBlob(base64, mimeType) {
     int8Array[i] = byteString.charCodeAt(i);
   }
   return new Blob([int8Array], {type: mimeType});  
+}
+
+async function sendToDiscord(formData) {
+  try {
+    const response = await fetch(WEBHOOK_URL, {
+      method: "POST",
+      body: formData,
+    });
+    console.log("Response: ", response);
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
