@@ -1,4 +1,4 @@
-# Chrome Extension to Send Media and Text to Discord
+# Chrome Extension to Send Media Files and Text to Discord with a Right-Click
 
 This is a Google Chrome extension that enables you to send images, gifs, text, and webm videos to a specified Discord channel via a Discord webhook.
 
